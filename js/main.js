@@ -6,7 +6,7 @@ var vm = new Vue({
   data: {
     // mock up the user - this well eventually come from the database UMS (user management system)
     user: {
-      isAdmin: true,
+      isadmin: true,
       isLoggedIn: true,
       avatar: null
     },
