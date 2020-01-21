@@ -20,7 +20,10 @@ var vm = new Vue({
 
   data: {
     // mock up the user - this well eventually come from the database UMS (user management system)
-    user: {},
+    user: {
+      isLoggedIn: false,
+      settings: {}
+    },
 
     // this data would also come from the database, but we'll just mock it up for now
     videodata: [
@@ -83,7 +86,7 @@ var vm = new Vue({
         console.log(data);
 
         // push our user data into the VM
-        this.user = data[0];
+        this.user.settings = data[0];
       })
       .catch((err) => console.log(err))
     }
