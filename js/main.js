@@ -1,22 +1,52 @@
-import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
+// import the login component first (actually all components here, but we're starting with login)
+import LoginComponent from "./components/LoginComponent.js"
 
-const myVM = (() => {
-    // instantiate a new Vue instance
-    let vue_vm = new Vue({
-        data: {
-            message: "Hello from Vue!",
+(() => {
+  let router = new VueRouter({
+    // set routes
+    routes: [
+      { path: '/', redirect: { name: "login" } },
+      { path: '/login', name: "login", component: LoginComponent },
+    ]
+  });
 
-            collection: [
-                { name: "Trevor", role: "Prof" },
-                { name: "Joe", role: "Awesome Prof" },
-                { name: "Justin", role: "Meanie Coordinator" }
-            ]
-        },
+  const vm = new Vue({
 
-        methods: {
-            logClicked() {
-                console.log('clicked on an element!');
-            }
-        }
-    }).$mount("#app");
+    data: {
+      authenticated: false,
+      administrator: false,
+
+      mockAccount: {
+        username: "user",
+        password: "password"
+      },
+
+      user: [],
+
+      //currentUser: {},
+    },
+
+    created: function () {
+      // do a localstorage session check and set authenticated to true if the session still exists
+      // if the cached user exists, then just navigate to their user home page
+
+      // the localstorage session will persist until logout
+    },
+
+    methods: {
+      setAuthenticated(status) {
+        this.authenticated = status;
+      },
+
+      logout() {
+        // delete local session
+
+        // push user back to login page
+        this.$router.push({ path: "/login" });
+        this.authenticated = false;
+      }
+    },
+
+    router: router
+  }).$mount("#app");
 })();
